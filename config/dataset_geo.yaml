@@ -1,0 +1,5 @@
+input_mode: geo
+normalization: auto
+prefer_series_matrix: true
+series_matrix_timeout_seconds: 60
+supplementary_timeout_seconds: 60

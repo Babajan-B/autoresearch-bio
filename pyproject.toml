@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autoresearch-bio"
+version = "0.1.0"
+description = "Terminal-first autonomous experimentation for bulk RNA-seq classification."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Autoresearch-Bio" }]
+dependencies = [
+  "matplotlib>=3.8",
+  "numpy>=1.26",
+  "openpyxl>=3.1",
+  "pandas>=2.2",
+  "PyYAML>=6.0",
+  "requests>=2.32",
+  "scikit-learn>=1.5",
+  "scipy>=1.13",
+  "seaborn>=0.13",
+  "shap>=0.46",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3"]
+paper = ["statsmodels>=0.14"]
+
+[project.scripts]
+autoresearch-bio = "src.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

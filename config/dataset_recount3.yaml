@@ -1,0 +1,5 @@
+input_mode: recount3
+organism: human
+project_home: data_sources/sra
+annotation: G026
+normalization: log1p

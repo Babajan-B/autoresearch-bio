@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Autoresearch-Bio: A Locked Research Loop for Reproducible Bulk RNA-seq Phenotype Classification"
+authors:
+  - family-names: Banaganapalli
+    given-names: Babajan
+    affiliation: "Department of Genetic Medicine, Faculty of Medicine, King Abdulaziz University"
+  - family-names: Khan
+    given-names: Sariya
+    affiliation: "Batterjee Medical College"
+  - family-names: Thalib
+    given-names: Husna Irfan
+    affiliation: "Batterjee Medical College"
+  - family-names: Shaik
+    given-names: Noor Ahmad
+    affiliation: "Department of Genetic Medicine, Faculty of Medicine, King Abdulaziz University"
+license: MIT
+repository-code: "https://github.com/Babajan-B/autoresearch-bio"

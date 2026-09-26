@@ -1,0 +1,11 @@
+baseline:
+  model_family: logistic_regression
+  top_k_genes: 1000
+train_defaults:
+  top_k_genes: 2000
+  model_family: random_forest
+available_models:
+  - logistic_regression
+  - random_forest
+  - extra_trees
+  - hist_gradient_boosting

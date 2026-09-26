@@ -1,0 +1,10 @@
+random_seed: 42
+normalization: auto
+val_fraction: 0.2
+test_fraction: 0.2
+baseline_top_k_genes: 1000
+train_top_k_genes: 2000
+default_ablation_genes:
+  - ESR1
+  - PGR
+  - ERBB2

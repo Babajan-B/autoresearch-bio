@@ -88,8 +88,7 @@ tests/            pytest suite with small synthetic fixtures
 If you use this code, please cite:
 
 Banaganapalli B, Khan S, Thalib HI, Shaik NA. Autoresearch-Bio: a locked research
-loop for reproducible bulk RNA-seq phenotype classification. *Network Modeling
-Analysis in Health Informatics and Bioinformatics* (under review).
+loop for reproducible bulk RNA-seq phenotype classification. https://github.com/Babajan-B/autoresearch-bio.git
 
 ## Licence
 

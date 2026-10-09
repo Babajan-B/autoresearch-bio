@@ -1,8 +1,8 @@
-# Autoresearch-Bio
+# LockLoop-Bio
 
 A locked research loop for reproducible bulk RNA-seq phenotype classification.
 
-Autoresearch-Bio adapts the fixed-harness design of Karpathy's
+LockLoop-Bio adapts the fixed-harness design of Karpathy's
 [autoresearch](https://github.com/karpathy/autoresearch) to transcriptomic
 machine learning. Decisions that usually stay open during an analysis are fixed
 in code before any model is trained:

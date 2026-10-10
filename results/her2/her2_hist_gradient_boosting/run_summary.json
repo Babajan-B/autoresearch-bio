@@ -1,0 +1,52 @@
+{
+  "run_name": "her2_hist_gradient_boosting",
+  "run_type": "train",
+  "model_family": "hist_gradient_boosting",
+  "dataset_id": "GSE96058_HER2_primary",
+  "output_dir": "reports/her2/runs/her2_hist_gradient_boosting",
+  "feature_count": 2000,
+  "status": "accepted",
+  "runtime_seconds": 317.91925145778805,
+  "validation_metrics": {
+    "auroc": 0.8707919065061923,
+    "macro_f1": 0.8329842793139101,
+    "brier_score": 0.06128269468273556,
+    "mcc": 0.6967383275536291,
+    "confusion_matrix": [
+      [
+        543,
+        3
+      ],
+      [
+        37,
+        47
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.55
+  },
+  "test_metrics": {
+    "auroc": 0.8890049621311048,
+    "macro_f1": 0.8152151769798828,
+    "brier_score": 0.06539927809639982,
+    "mcc": 0.6487263291892267,
+    "confusion_matrix": [
+      [
+        538,
+        9
+      ],
+      [
+        37,
+        47
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.55
+  }
+}

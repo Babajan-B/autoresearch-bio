@@ -1,0 +1,52 @@
+{
+  "run_name": "ablation_logistic_regression",
+  "run_type": "ablation",
+  "model_family": "logistic_regression",
+  "dataset_id": "GSE96058_ER_primary",
+  "output_dir": "reports/runs/ablation_luminal_markers",
+  "feature_count": 1000,
+  "status": "rejected",
+  "runtime_seconds": 2.3507259999751113,
+  "validation_metrics": {
+    "auroc": 0.9395208700764255,
+    "macro_f1": 0.8366060430403595,
+    "brier_score": 0.046979737749451626,
+    "mcc": 0.6813339600888004,
+    "confusion_matrix": [
+      [
+        39,
+        9
+      ],
+      [
+        24,
+        543
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.7
+  },
+  "test_metrics": {
+    "auroc": 0.9829512051734275,
+    "macro_f1": 0.8646481795887568,
+    "brier_score": 0.03140862136392172,
+    "mcc": 0.741236366422695,
+    "confusion_matrix": [
+      [
+        43,
+        5
+      ],
+      [
+        23,
+        544
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.7
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-04-12T21:01:51.224548+00:00",
+  "external_dataset_id": "GSE81538_PAM50_proxy_external",
+  "external_metrics": {
+    "auroc": 1.0,
+    "brier_score": 0.00440252862370721,
+    "confusion_matrix": [
+      [
+        56,
+        1
+      ],
+      [
+        0,
+        261
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "macro_f1": 0.9946191982943874,
+    "mcc": 0.9892958646199418,
+    "threshold": 0.7000000000000001
+  },
+  "feature_count": 1000,
+  "missing_gene_count": 709,
+  "model_family": "LogisticRegression",
+  "notes": "External validation on GSE81538 PAM50 luminal-vs-basal proxy cohort.",
+  "output_dir": "reports/external_validation/baseline_to_gse81538",
+  "reference_prepared_dir": "data/processed/GSE96058_ER_primary",
+  "reference_run_dir": "artifacts/external_validation_reference/baseline",
+  "run_name": "baseline_to_gse81538",
+  "runtime_seconds": 0.29827254195697606,
+  "shared_gene_count": 291
+}

@@ -1,0 +1,52 @@
+{
+  "run_name": "hist_gradient_boosting_gse96058_er",
+  "run_type": "train",
+  "model_family": "hist_gradient_boosting",
+  "dataset_id": "GSE96058_ER_primary",
+  "output_dir": "reports/runs/hist_gradient_boosting_gse96058_er",
+  "feature_count": 2000,
+  "status": "rejected",
+  "runtime_seconds": 124.35222425003303,
+  "validation_metrics": {
+    "auroc": 0.9262198706643151,
+    "macro_f1": 0.8540375974924093,
+    "brier_score": 0.04346052345419105,
+    "mcc": 0.7146066346484897,
+    "confusion_matrix": [
+      [
+        40,
+        8
+      ],
+      [
+        21,
+        546
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.8
+  },
+  "test_metrics": {
+    "auroc": 0.986845972957084,
+    "macro_f1": 0.8781937017231135,
+    "brier_score": 0.028178466342321157,
+    "mcc": 0.7623395035425612,
+    "confusion_matrix": [
+      [
+        42,
+        6
+      ],
+      [
+        18,
+        549
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.8
+  }
+}

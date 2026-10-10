@@ -1,0 +1,606 @@
+[
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 1000,
+    "git_commit_hash": null,
+    "model_family": "logistic_regression",
+    "model_path": "reports/her2/runs/baseline/model.pkl",
+    "notes": "Baseline logistic regression required by the locked evaluation policy.",
+    "output_dir": "reports/her2/runs/baseline",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "baseline_logistic_regression",
+    "run_type": "baseline",
+    "runtime_seconds": 2.3199,
+    "selected_genes_path": "reports/her2/runs/baseline/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/baseline/shap/top_genes_by_shap.csv",
+    "status": "accepted",
+    "test_metrics": {
+      "auroc": 0.8585574997823627,
+      "brier_score": 0.0910663665967256,
+      "confusion_matrix": [
+        [
+          530,
+          17
+        ],
+        [
+          36,
+          48
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.7983381271971876,
+      "mcc": 0.603870114042414,
+      "threshold": 0.85
+    },
+    "timestamp": "2026-10-10T00:18:33.566257+00:00",
+    "validation_metrics": {
+      "auroc": 0.8613073434502007,
+      "brier_score": 0.09442994532618472,
+      "confusion_matrix": [
+        [
+          522,
+          24
+        ],
+        [
+          34,
+          50
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.7901399067288475,
+      "mcc": 0.5820449983835326,
+      "threshold": 0.85
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "random_forest",
+    "model_path": "reports/her2/runs/her2_random_forest/model.pkl",
+    "notes": "HER2 benchmark",
+    "output_dir": "reports/her2/runs/her2_random_forest",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "her2_random_forest",
+    "run_type": "train",
+    "runtime_seconds": 7.8847,
+    "selected_genes_path": "reports/her2/runs/her2_random_forest/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/her2_random_forest/shap/top_genes_by_shap.csv",
+    "status": "superseded",
+    "test_metrics": {
+      "auroc": 0.8709954731435536,
+      "brier_score": 0.07281346548641351,
+      "confusion_matrix": [
+        [
+          536,
+          11
+        ],
+        [
+          38,
+          46
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8043856485787133,
+      "mcc": 0.6251296541115804,
+      "threshold": 0.35
+    },
+    "timestamp": "2026-10-10T00:19:08.970492+00:00",
+    "validation_metrics": {
+      "auroc": 0.86467599860457,
+      "brier_score": 0.07338816670138086,
+      "confusion_matrix": [
+        [
+          536,
+          10
+        ],
+        [
+          40,
+          44
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.7965589397814461,
+      "mcc": 0.6138245895861674,
+      "threshold": 0.35
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "hist_gradient_boosting",
+    "model_path": "reports/her2/runs/her2_hist_gradient_boosting/model.pkl",
+    "notes": "HER2 benchmark",
+    "output_dir": "reports/her2/runs/her2_hist_gradient_boosting",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "her2_hist_gradient_boosting",
+    "run_type": "train",
+    "runtime_seconds": 317.9193,
+    "selected_genes_path": "reports/her2/runs/her2_hist_gradient_boosting/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/her2_hist_gradient_boosting/shap/top_genes_by_shap.csv",
+    "status": "superseded",
+    "test_metrics": {
+      "auroc": 0.8890049621311048,
+      "brier_score": 0.06539927809639982,
+      "confusion_matrix": [
+        [
+          538,
+          9
+        ],
+        [
+          37,
+          47
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8152151769798828,
+      "mcc": 0.6487263291892267,
+      "threshold": 0.55
+    },
+    "timestamp": "2026-10-10T00:24:54.591668+00:00",
+    "validation_metrics": {
+      "auroc": 0.8707919065061923,
+      "brier_score": 0.06128269468273556,
+      "confusion_matrix": [
+        [
+          543,
+          3
+        ],
+        [
+          37,
+          47
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8329842793139101,
+      "mcc": 0.6967383275536291,
+      "threshold": 0.55
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/her2/runs/her2_extra_trees_seed_7/model.pkl",
+    "notes": "HER2 benchmark",
+    "output_dir": "reports/her2/runs/her2_extra_trees_seed_7",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "her2_extra_trees_seed_7",
+    "run_type": "train",
+    "runtime_seconds": 20.4308,
+    "selected_genes_path": "reports/her2/runs/her2_extra_trees_seed_7/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/her2_extra_trees_seed_7/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.8701466875598501,
+      "brier_score": 0.07466448749254684,
+      "confusion_matrix": [
+        [
+          527,
+          20
+        ],
+        [
+          28,
+          56
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8282214156079855,
+      "mcc": 0.6576456869230902,
+      "threshold": 0.3
+    },
+    "timestamp": "2026-10-10T00:25:47.909528+00:00",
+    "validation_metrics": {
+      "auroc": 0.8673687423687423,
+      "brier_score": 0.07439682526997261,
+      "confusion_matrix": [
+        [
+          532,
+          14
+        ],
+        [
+          35,
+          49
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8113207547169812,
+      "mcc": 0.631929768778593,
+      "threshold": 0.3
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/her2/runs/her2_extra_trees_seed_42/model.pkl",
+    "notes": "HER2 benchmark",
+    "output_dir": "reports/her2/runs/her2_extra_trees_seed_42",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "her2_extra_trees_seed_42",
+    "run_type": "train",
+    "runtime_seconds": 20.6817,
+    "selected_genes_path": "reports/her2/runs/her2_extra_trees_seed_42/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/her2_extra_trees_seed_42/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.8744667885435711,
+      "brier_score": 0.07511863632844999,
+      "confusion_matrix": [
+        [
+          528,
+          19
+        ],
+        [
+          31,
+          53
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8171396114434089,
+      "mcc": 0.6370387439413411,
+      "threshold": 0.3
+    },
+    "timestamp": "2026-10-10T00:26:36.136073+00:00",
+    "validation_metrics": {
+      "auroc": 0.8680228501657073,
+      "brier_score": 0.07410764601940295,
+      "confusion_matrix": [
+        [
+          528,
+          18
+        ],
+        [
+          34,
+          50
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8054816644499335,
+      "mcc": 0.6159693221468039,
+      "threshold": 0.3
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/her2/runs/her2_extra_trees_seed_123/model.pkl",
+    "notes": "HER2 benchmark",
+    "output_dir": "reports/her2/runs/her2_extra_trees_seed_123",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "her2_extra_trees_seed_123",
+    "run_type": "train",
+    "runtime_seconds": 20.5426,
+    "selected_genes_path": "reports/her2/runs/her2_extra_trees_seed_123/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/her2_extra_trees_seed_123/shap/top_genes_by_shap.csv",
+    "status": "superseded",
+    "test_metrics": {
+      "auroc": 0.8772090188909202,
+      "brier_score": 0.07435841723843216,
+      "confusion_matrix": [
+        [
+          529,
+          18
+        ],
+        [
+          28,
+          56
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8335970464135021,
+      "mcc": 0.6691363252912965,
+      "threshold": 0.3
+    },
+    "timestamp": "2026-10-10T00:27:24.539267+00:00",
+    "validation_metrics": {
+      "auroc": 0.870900924472353,
+      "brier_score": 0.073963732562608,
+      "confusion_matrix": [
+        [
+          533,
+          13
+        ],
+        [
+          37,
+          47
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8039874551971327,
+      "mcc": 0.6203776439013834,
+      "threshold": 0.3
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 500,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/her2/runs/her2_extra_trees_topk_500/model.pkl",
+    "notes": "HER2 benchmark",
+    "output_dir": "reports/her2/runs/her2_extra_trees_topk_500",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "her2_extra_trees_topk_500",
+    "run_type": "train",
+    "runtime_seconds": 25.6179,
+    "selected_genes_path": "reports/her2/runs/her2_extra_trees_topk_500/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/her2_extra_trees_topk_500/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.868024723600592,
+      "brier_score": 0.08655209717122381,
+      "confusion_matrix": [
+        [
+          538,
+          9
+        ],
+        [
+          44,
+          40
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.7772797804964138,
+      "mcc": 0.5835570501417594,
+      "threshold": 0.3
+    },
+    "timestamp": "2026-10-10T00:28:18.013232+00:00",
+    "validation_metrics": {
+      "auroc": 0.8652319902319903,
+      "brier_score": 0.08612871508829585,
+      "confusion_matrix": [
+        [
+          540,
+          6
+        ],
+        [
+          43,
+          41
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.7912764792189264,
+      "mcc": 0.6172595856392926,
+      "threshold": 0.3
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 1000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/her2/runs/her2_extra_trees_topk_1000/model.pkl",
+    "notes": "HER2 benchmark",
+    "output_dir": "reports/her2/runs/her2_extra_trees_topk_1000",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "her2_extra_trees_topk_1000",
+    "run_type": "train",
+    "runtime_seconds": 21.9056,
+    "selected_genes_path": "reports/her2/runs/her2_extra_trees_topk_1000/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/her2_extra_trees_topk_1000/shap/top_genes_by_shap.csv",
+    "status": "accepted",
+    "test_metrics": {
+      "auroc": 0.8819099852006616,
+      "brier_score": 0.07519795275209308,
+      "confusion_matrix": [
+        [
+          531,
+          16
+        ],
+        [
+          34,
+          50
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8108513189448441,
+      "mcc": 0.6282667273479084,
+      "threshold": 0.3
+    },
+    "timestamp": "2026-10-10T00:29:07.729704+00:00",
+    "validation_metrics": {
+      "auroc": 0.8844300540729112,
+      "brier_score": 0.07374977886264249,
+      "confusion_matrix": [
+        [
+          532,
+          14
+        ],
+        [
+          35,
+          49
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8113207547169812,
+      "mcc": 0.631929768778593,
+      "threshold": 0.3
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [],
+    "feature_count": 5000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/her2/runs/her2_extra_trees_topk_5000/model.pkl",
+    "notes": "HER2 benchmark",
+    "output_dir": "reports/her2/runs/her2_extra_trees_topk_5000",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "her2_extra_trees_topk_5000",
+    "run_type": "train",
+    "runtime_seconds": 18.3574,
+    "selected_genes_path": "reports/her2/runs/her2_extra_trees_topk_5000/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/her2_extra_trees_topk_5000/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9058283276747628,
+      "brier_score": 0.06457604395267787,
+      "confusion_matrix": [
+        [
+          535,
+          12
+        ],
+        [
+          27,
+          57
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8549656111317385,
+      "mcc": 0.7147656868005261,
+      "threshold": 0.3
+    },
+    "timestamp": "2026-10-10T00:29:53.943149+00:00",
+    "validation_metrics": {
+      "auroc": 0.8835034013605442,
+      "brier_score": 0.06595634226771008,
+      "confusion_matrix": [
+        [
+          538,
+          8
+        ],
+        [
+          31,
+          53
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8480284521416421,
+      "mcc": 0.7084469575368837,
+      "threshold": 0.3
+    }
+  },
+  {
+    "dataset_id": "GSE96058_HER2_primary",
+    "excluded_genes": [
+      "ERBB2",
+      "GRB7",
+      "STARD3"
+    ],
+    "feature_count": 1000,
+    "git_commit_hash": null,
+    "model_family": "logistic_regression",
+    "model_path": "reports/her2/runs/ablation_17q12/model.pkl",
+    "notes": "Shortcut-gene ablation excluding: ERBB2, GRB7, STARD3",
+    "output_dir": "reports/her2/runs/ablation_17q12",
+    "prepared_dir": "data/processed/GSE96058_HER2_primary",
+    "run_name": "ablation_logistic_regression",
+    "run_type": "ablation",
+    "runtime_seconds": 2.5032,
+    "selected_genes_path": "reports/her2/runs/ablation_17q12/selected_genes.txt",
+    "shap_top_genes_path": "reports/her2/runs/ablation_17q12/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.8585574997823627,
+      "brier_score": 0.0910663665967256,
+      "confusion_matrix": [
+        [
+          530,
+          17
+        ],
+        [
+          36,
+          48
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.7983381271971876,
+      "mcc": 0.603870114042414,
+      "threshold": 0.85
+    },
+    "timestamp": "2026-10-10T00:30:24.088005+00:00",
+    "validation_metrics": {
+      "auroc": 0.8613073434502007,
+      "brier_score": 0.09442994532618472,
+      "confusion_matrix": [
+        [
+          522,
+          24
+        ],
+        [
+          34,
+          50
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.7901399067288475,
+      "mcc": 0.5820449983835326,
+      "threshold": 0.85
+    }
+  }
+]

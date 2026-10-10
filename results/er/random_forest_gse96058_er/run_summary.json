@@ -1,0 +1,52 @@
+{
+  "run_name": "random_forest_gse96058_er",
+  "run_type": "train",
+  "model_family": "random_forest",
+  "dataset_id": "GSE96058_ER_primary",
+  "output_dir": "reports/runs/random_forest_gse96058_er",
+  "feature_count": 2000,
+  "status": "rejected",
+  "runtime_seconds": 5.19895141600864,
+  "validation_metrics": {
+    "auroc": 0.9442607289829511,
+    "macro_f1": 0.8646481795887568,
+    "brier_score": 0.03539185310338295,
+    "mcc": 0.741236366422695,
+    "confusion_matrix": [
+      [
+        43,
+        5
+      ],
+      [
+        23,
+        544
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.75
+  },
+  "test_metrics": {
+    "auroc": 0.9884259259259259,
+    "macro_f1": 0.8726105225779723,
+    "brier_score": 0.024223680883952107,
+    "mcc": 0.7680733841423899,
+    "confusion_matrix": [
+      [
+        47,
+        1
+      ],
+      [
+        27,
+        540
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.75
+  }
+}

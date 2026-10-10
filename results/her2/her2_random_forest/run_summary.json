@@ -1,0 +1,52 @@
+{
+  "run_name": "her2_random_forest",
+  "run_type": "train",
+  "model_family": "random_forest",
+  "dataset_id": "GSE96058_HER2_primary",
+  "output_dir": "reports/her2/runs/her2_random_forest",
+  "feature_count": 2000,
+  "status": "accepted",
+  "runtime_seconds": 7.884660958778113,
+  "validation_metrics": {
+    "auroc": 0.86467599860457,
+    "macro_f1": 0.7965589397814461,
+    "brier_score": 0.07338816670138086,
+    "mcc": 0.6138245895861674,
+    "confusion_matrix": [
+      [
+        536,
+        10
+      ],
+      [
+        40,
+        44
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.35
+  },
+  "test_metrics": {
+    "auroc": 0.8709954731435536,
+    "macro_f1": 0.8043856485787133,
+    "brier_score": 0.07281346548641351,
+    "mcc": 0.6251296541115804,
+    "confusion_matrix": [
+      [
+        536,
+        11
+      ],
+      [
+        38,
+        46
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.35
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "run_name": "extra_trees_seed_123",
+  "run_type": "train",
+  "model_family": "extra_trees",
+  "dataset_id": "GSE96058",
+  "output_dir": "reports/runs/extra_trees_seed_123",
+  "feature_count": 2000,
+  "status": "rejected",
+  "runtime_seconds": 12.269378796219826,
+  "validation_metrics": {
+    "auroc": 0.9486515285126398,
+    "macro_f1": 0.8609085591733281,
+    "brier_score": 0.0347569960263198,
+    "mcc": 0.7348364412585372,
+    "confusion_matrix": [
+      [
+        43,
+        5
+      ],
+      [
+        24,
+        543
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.75
+  },
+  "test_metrics": {
+    "auroc": 0.9856334509112286,
+    "macro_f1": 0.8635112741906847,
+    "brier_score": 0.02595510492268463,
+    "mcc": 0.749441856068885,
+    "confusion_matrix": [
+      [
+        46,
+        2
+      ],
+      [
+        28,
+        539
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.75
+  }
+}

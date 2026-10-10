@@ -1,0 +1,52 @@
+{
+  "run_name": "extra_trees_topk_5000",
+  "run_type": "train",
+  "model_family": "extra_trees",
+  "dataset_id": "GSE96058_ER_primary",
+  "output_dir": "reports/runs/extra_trees_topk_5000",
+  "feature_count": 5000,
+  "status": "rejected",
+  "runtime_seconds": 9.480597292014863,
+  "validation_metrics": {
+    "auroc": 0.9462448559670782,
+    "macro_f1": 0.8587002162873056,
+    "brier_score": 0.034687082550777376,
+    "mcc": 0.7280596507641768,
+    "confusion_matrix": [
+      [
+        42,
+        6
+      ],
+      [
+        23,
+        544
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.7
+  },
+  "test_metrics": {
+    "auroc": 0.9864417989417988,
+    "macro_f1": 0.8819314857050706,
+    "brier_score": 0.0259458980229205,
+    "mcc": 0.7800539608878865,
+    "confusion_matrix": [
+      [
+        46,
+        2
+      ],
+      [
+        23,
+        544
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.7
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "run_name": "her2_extra_trees_topk_500",
+  "run_type": "train",
+  "model_family": "extra_trees",
+  "dataset_id": "GSE96058_HER2_primary",
+  "output_dir": "reports/her2/runs/her2_extra_trees_topk_500",
+  "feature_count": 500,
+  "status": "rejected",
+  "runtime_seconds": 25.617884415667504,
+  "validation_metrics": {
+    "auroc": 0.8652319902319903,
+    "macro_f1": 0.7912764792189264,
+    "brier_score": 0.08612871508829585,
+    "mcc": 0.6172595856392926,
+    "confusion_matrix": [
+      [
+        540,
+        6
+      ],
+      [
+        43,
+        41
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.3
+  },
+  "test_metrics": {
+    "auroc": 0.868024723600592,
+    "macro_f1": 0.7772797804964138,
+    "brier_score": 0.08655209717122381,
+    "mcc": 0.5835570501417594,
+    "confusion_matrix": [
+      [
+        538,
+        9
+      ],
+      [
+        44,
+        40
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.3
+  }
+}

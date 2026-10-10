@@ -1,0 +1,52 @@
+{
+  "run_name": "ablation_logistic_regression",
+  "run_type": "ablation",
+  "model_family": "logistic_regression",
+  "dataset_id": "GSE96058_ER_primary",
+  "output_dir": "reports/runs/ablation_esr1_pgr_erbb2",
+  "feature_count": 1000,
+  "status": "accepted",
+  "runtime_seconds": 2.3450600419892,
+  "validation_metrics": {
+    "auroc": 0.9397413286302173,
+    "macro_f1": 0.8366060430403595,
+    "brier_score": 0.048258665180868784,
+    "mcc": 0.6813339600888004,
+    "confusion_matrix": [
+      [
+        39,
+        9
+      ],
+      [
+        24,
+        543
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.7
+  },
+  "test_metrics": {
+    "auroc": 0.9826940035273368,
+    "macro_f1": 0.8684450289571466,
+    "brier_score": 0.03151184653049074,
+    "mcc": 0.7477759292855317,
+    "confusion_matrix": [
+      [
+        43,
+        5
+      ],
+      [
+        22,
+        545
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "threshold": 0.7
+  }
+}

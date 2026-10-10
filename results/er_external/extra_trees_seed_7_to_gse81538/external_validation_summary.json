@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-04-12T21:01:51.165338+00:00",
+  "external_dataset_id": "GSE81538_PAM50_proxy_external",
+  "external_metrics": {
+    "auroc": 1.0,
+    "brier_score": 0.07078720819734141,
+    "confusion_matrix": [
+      [
+        55,
+        2
+      ],
+      [
+        0,
+        261
+      ]
+    ],
+    "labels": [
+      "0",
+      "1"
+    ],
+    "macro_f1": 0.9891630316248636,
+    "mcc": 0.9785573793737575,
+    "threshold": 0.7000000000000001
+  },
+  "feature_count": 2000,
+  "missing_gene_count": 1117,
+  "model_family": "ExtraTreesClassifier",
+  "notes": "External validation on GSE81538 PAM50 luminal-vs-basal proxy cohort.",
+  "output_dir": "reports/external_validation/extra_trees_seed_7_to_gse81538",
+  "reference_prepared_dir": "data/processed/GSE96058_ER_primary",
+  "reference_run_dir": "artifacts/external_validation_reference/extra_trees_seed_7",
+  "run_name": "extra_trees_seed_7_to_gse81538",
+  "runtime_seconds": 0.4398488749866374,
+  "shared_gene_count": 883
+}

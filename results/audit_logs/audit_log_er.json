@@ -1,0 +1,790 @@
+[
+  {
+    "dataset_id": "local_expression",
+    "excluded_genes": [],
+    "feature_count": 8,
+    "git_commit_hash": "278ef21b49cb1ed2e9127f2df0183c0680fe9168",
+    "model_family": "logistic_regression",
+    "model_path": "reports/baseline/local_smoke/model.pkl",
+    "notes": "Baseline logistic regression required by the locked evaluation policy.",
+    "output_dir": "reports/baseline/local_smoke",
+    "prepared_dir": "data/processed/local_smoke",
+    "run_name": "baseline_logistic_regression",
+    "run_type": "baseline",
+    "runtime_seconds": 0.4417,
+    "selected_genes_path": "reports/baseline/local_smoke/selected_genes.txt",
+    "shap_top_genes_path": "reports/baseline/local_smoke/shap/top_genes_by_shap.csv",
+    "status": "accepted",
+    "test_metrics": {
+      "auroc": 1.0,
+      "brier_score": 0.0027986042054470826,
+      "confusion_matrix": [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "labels": [
+        "negative",
+        "positive"
+      ],
+      "macro_f1": 1.0,
+      "mcc": 1.0,
+      "threshold": 0.1
+    },
+    "timestamp": "2026-04-11T22:15:40.317554+00:00",
+    "validation_metrics": {
+      "auroc": 1.0,
+      "brier_score": 0.00246579901343392,
+      "confusion_matrix": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "labels": [
+        "negative",
+        "positive"
+      ],
+      "macro_f1": 1.0,
+      "mcc": 1.0,
+      "threshold": 0.1
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 1000,
+    "git_commit_hash": null,
+    "model_family": "logistic_regression",
+    "model_path": "reports/baseline/GSE96058_ER_primary/model.pkl",
+    "notes": "Baseline logistic regression required by the locked evaluation policy.",
+    "output_dir": "reports/baseline/GSE96058_ER_primary",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "baseline_logistic_regression",
+    "run_type": "baseline",
+    "runtime_seconds": 4.0458,
+    "selected_genes_path": "reports/baseline/GSE96058_ER_primary/selected_genes.txt",
+    "shap_top_genes_path": "reports/baseline/GSE96058_ER_primary/shap/top_genes_by_shap.csv",
+    "status": "accepted",
+    "test_metrics": {
+      "auroc": 0.982473544973545,
+      "brier_score": 0.031231491263395583,
+      "confusion_matrix": [
+        [
+          44,
+          4
+        ],
+        [
+          23,
+          544
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8705010723337883,
+      "mcc": 0.7542916227719042,
+      "threshold": 0.7
+    },
+    "timestamp": "2026-04-12T11:23:39.396137+00:00",
+    "validation_metrics": {
+      "auroc": 0.939484126984127,
+      "brier_score": 0.047183715481576995,
+      "confusion_matrix": [
+        [
+          39,
+          9
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8366060430403595,
+      "mcc": 0.6813339600888004,
+      "threshold": 0.7
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/runs/extra_trees_gse96058_er/model.pkl",
+    "notes": "",
+    "output_dir": "reports/runs/extra_trees_gse96058_er",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "extra_trees_gse96058_er",
+    "run_type": "train",
+    "runtime_seconds": 12.829,
+    "selected_genes_path": "reports/runs/extra_trees_gse96058_er/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/extra_trees_gse96058_er/shap/top_genes_by_shap.csv",
+    "status": "superseded",
+    "test_metrics": {
+      "auroc": 0.9858906525573192,
+      "brier_score": 0.02589638230277516,
+      "confusion_matrix": [
+        [
+          46,
+          2
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8781398609925619,
+      "mcc": 0.7736826525021417,
+      "threshold": 0.7
+    },
+    "timestamp": "2026-04-12T11:24:26.492327+00:00",
+    "validation_metrics": {
+      "auroc": 0.9467225161669607,
+      "brier_score": 0.03497501417840175,
+      "confusion_matrix": [
+        [
+          43,
+          5
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8609085591733281,
+      "mcc": 0.7348364412585372,
+      "threshold": 0.7
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [
+      "ERBB2",
+      "ESR1",
+      "PGR"
+    ],
+    "feature_count": 1000,
+    "git_commit_hash": null,
+    "model_family": "logistic_regression",
+    "model_path": "reports/runs/ablation_esr1_pgr_erbb2/model.pkl",
+    "notes": "Shortcut-gene ablation excluding: ESR1, PGR, ERBB2",
+    "output_dir": "reports/runs/ablation_esr1_pgr_erbb2",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "ablation_logistic_regression",
+    "run_type": "ablation",
+    "runtime_seconds": 3.3449,
+    "selected_genes_path": "reports/runs/ablation_esr1_pgr_erbb2/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/ablation_esr1_pgr_erbb2/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9826940035273368,
+      "brier_score": 0.03151184653049041,
+      "confusion_matrix": [
+        [
+          43,
+          5
+        ],
+        [
+          22,
+          545
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8684450289571466,
+      "mcc": 0.7477759292855317,
+      "threshold": 0.7
+    },
+    "timestamp": "2026-04-12T11:25:02.814743+00:00",
+    "validation_metrics": {
+      "auroc": 0.9397413286302173,
+      "brier_score": 0.04825866518086875,
+      "confusion_matrix": [
+        [
+          39,
+          9
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8366060430403595,
+      "mcc": 0.6813339600888004,
+      "threshold": 0.7
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "random_forest",
+    "model_path": "reports/runs/random_forest_gse96058_er/model.pkl",
+    "notes": "Paper suite model comparison on frozen GSE96058 splits.",
+    "output_dir": "reports/runs/random_forest_gse96058_er",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "random_forest_gse96058_er",
+    "run_type": "train",
+    "runtime_seconds": 5.1857,
+    "selected_genes_path": "reports/runs/random_forest_gse96058_er/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/random_forest_gse96058_er/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9884259259259259,
+      "brier_score": 0.024219838472410115,
+      "confusion_matrix": [
+        [
+          47,
+          1
+        ],
+        [
+          27,
+          540
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8726105225779723,
+      "mcc": 0.7680733841423899,
+      "threshold": 0.75
+    },
+    "timestamp": "2026-04-12T11:47:01.245429+00:00",
+    "validation_metrics": {
+      "auroc": 0.9443342151675485,
+      "brier_score": 0.03539021683247596,
+      "confusion_matrix": [
+        [
+          43,
+          5
+        ],
+        [
+          23,
+          544
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8646481795887568,
+      "mcc": 0.741236366422695,
+      "threshold": 0.75
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "hist_gradient_boosting",
+    "model_path": "reports/runs/hist_gradient_boosting_gse96058_er/model.pkl",
+    "notes": "Paper suite model comparison on frozen GSE96058 splits.",
+    "output_dir": "reports/runs/hist_gradient_boosting_gse96058_er",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "hist_gradient_boosting_gse96058_er",
+    "run_type": "train",
+    "runtime_seconds": 40.3069,
+    "selected_genes_path": "reports/runs/hist_gradient_boosting_gse96058_er/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/hist_gradient_boosting_gse96058_er/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9859273956496178,
+      "brier_score": 0.02790671888476219,
+      "confusion_matrix": [
+        [
+          40,
+          8
+        ],
+        [
+          11,
+          556
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8956407577097232,
+      "mcc": 0.7917282738746046,
+      "threshold": 0.55
+    },
+    "timestamp": "2026-04-12T11:52:58.856255+00:00",
+    "validation_metrics": {
+      "auroc": 0.9296002351557908,
+      "brier_score": 0.042801073037000446,
+      "confusion_matrix": [
+        [
+          37,
+          11
+        ],
+        [
+          17,
+          550
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8503337505214852,
+      "mcc": 0.7022062513805822,
+      "threshold": 0.55
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/runs/extra_trees_seed_7/model.pkl",
+    "notes": "Seed stability experiment on frozen GSE96058 splits.",
+    "output_dir": "reports/runs/extra_trees_seed_7",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "extra_trees_seed_7",
+    "run_type": "train",
+    "runtime_seconds": 12.6443,
+    "selected_genes_path": "reports/runs/extra_trees_seed_7/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/extra_trees_seed_7/shap/top_genes_by_shap.csv",
+    "status": "accepted",
+    "test_metrics": {
+      "auroc": 0.9867724867724866,
+      "brier_score": 0.025665602296532,
+      "confusion_matrix": [
+        [
+          46,
+          2
+        ],
+        [
+          26,
+          541
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8707207207207208,
+      "mcc": 0.761321975130458,
+      "threshold": 0.7
+    },
+    "timestamp": "2026-04-12T11:53:44.226547+00:00",
+    "validation_metrics": {
+      "auroc": 0.954181363903586,
+      "brier_score": 0.03489936294230216,
+      "confusion_matrix": [
+        [
+          43,
+          5
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8609085591733281,
+      "mcc": 0.7348364412585372,
+      "threshold": 0.7
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/runs/extra_trees_seed_123/model.pkl",
+    "notes": "Seed stability experiment on frozen GSE96058 splits.",
+    "output_dir": "reports/runs/extra_trees_seed_123",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "extra_trees_seed_123",
+    "run_type": "train",
+    "runtime_seconds": 12.2694,
+    "selected_genes_path": "reports/runs/extra_trees_seed_123/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/extra_trees_seed_123/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9856334509112286,
+      "brier_score": 0.02595510492268463,
+      "confusion_matrix": [
+        [
+          46,
+          2
+        ],
+        [
+          28,
+          539
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8635112741906847,
+      "mcc": 0.749441856068885,
+      "threshold": 0.75
+    },
+    "timestamp": "2026-04-12T11:55:14.331256+00:00",
+    "validation_metrics": {
+      "auroc": 0.9486515285126398,
+      "brier_score": 0.0347569960263198,
+      "confusion_matrix": [
+        [
+          43,
+          5
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8609085591733281,
+      "mcc": 0.7348364412585372,
+      "threshold": 0.75
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 500,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/runs/extra_trees_topk_500/model.pkl",
+    "notes": "Top-k sensitivity experiment on frozen GSE96058 splits.",
+    "output_dir": "reports/runs/extra_trees_topk_500",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "extra_trees_topk_500",
+    "run_type": "train",
+    "runtime_seconds": 19.3606,
+    "selected_genes_path": "reports/runs/extra_trees_topk_500/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/extra_trees_topk_500/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9825837742504409,
+      "brier_score": 0.032998407279569056,
+      "confusion_matrix": [
+        [
+          46,
+          2
+        ],
+        [
+          30,
+          537
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8565011958233681,
+      "mcc": 0.7380106454690634,
+      "threshold": 0.8
+    },
+    "timestamp": "2026-04-12T11:56:05.927375+00:00",
+    "validation_metrics": {
+      "auroc": 0.9508009994121105,
+      "brier_score": 0.04084636214676152,
+      "confusion_matrix": [
+        [
+          42,
+          6
+        ],
+        [
+          30,
+          537
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8337837837837838,
+      "mcc": 0.6859071382608064,
+      "threshold": 0.8
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 1000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/runs/extra_trees_topk_1000/model.pkl",
+    "notes": "Top-k sensitivity experiment on frozen GSE96058 splits.",
+    "output_dir": "reports/runs/extra_trees_topk_1000",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "extra_trees_topk_1000",
+    "run_type": "train",
+    "runtime_seconds": 13.6779,
+    "selected_genes_path": "reports/runs/extra_trees_topk_1000/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/extra_trees_topk_1000/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9846781305114639,
+      "brier_score": 0.027357564604049464,
+      "confusion_matrix": [
+        [
+          46,
+          2
+        ],
+        [
+          27,
+          540
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.867090447056018,
+      "mcc": 0.755323894803829,
+      "threshold": 0.7
+    },
+    "timestamp": "2026-04-12T11:56:52.571738+00:00",
+    "validation_metrics": {
+      "auroc": 0.9459325396825395,
+      "brier_score": 0.035215056763026345,
+      "confusion_matrix": [
+        [
+          42,
+          6
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8549801924165252,
+      "mcc": 0.7216522118774376,
+      "threshold": 0.7
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 2000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/runs/extra_trees_topk_2000/model.pkl",
+    "notes": "Top-k sensitivity experiment on frozen GSE96058 splits.",
+    "output_dir": "reports/runs/extra_trees_topk_2000",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "extra_trees_topk_2000",
+    "run_type": "train",
+    "runtime_seconds": 12.8601,
+    "selected_genes_path": "reports/runs/extra_trees_topk_2000/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/extra_trees_topk_2000/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9858906525573192,
+      "brier_score": 0.02589638230277516,
+      "confusion_matrix": [
+        [
+          46,
+          2
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8781398609925619,
+      "mcc": 0.7736826525021417,
+      "threshold": 0.7
+    },
+    "timestamp": "2026-04-12T11:57:38.103838+00:00",
+    "validation_metrics": {
+      "auroc": 0.9467225161669606,
+      "brier_score": 0.03497501417840175,
+      "confusion_matrix": [
+        [
+          43,
+          5
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8609085591733281,
+      "mcc": 0.7348364412585372,
+      "threshold": 0.7
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [],
+    "feature_count": 5000,
+    "git_commit_hash": null,
+    "model_family": "extra_trees",
+    "model_path": "reports/runs/extra_trees_topk_5000/model.pkl",
+    "notes": "Top-k sensitivity experiment on frozen GSE96058 splits.",
+    "output_dir": "reports/runs/extra_trees_topk_5000",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "extra_trees_topk_5000",
+    "run_type": "train",
+    "runtime_seconds": 12.3336,
+    "selected_genes_path": "reports/runs/extra_trees_topk_5000/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/extra_trees_topk_5000/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9864417989417988,
+      "brier_score": 0.025957994741551513,
+      "confusion_matrix": [
+        [
+          46,
+          2
+        ],
+        [
+          23,
+          544
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8819314857050706,
+      "mcc": 0.7800539608878865,
+      "threshold": 0.7
+    },
+    "timestamp": "2026-04-12T11:58:23.691482+00:00",
+    "validation_metrics": {
+      "auroc": 0.9462632275132274,
+      "brier_score": 0.0346621286563231,
+      "confusion_matrix": [
+        [
+          42,
+          6
+        ],
+        [
+          23,
+          544
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8587002162873056,
+      "mcc": 0.7280596507641768,
+      "threshold": 0.7
+    }
+  },
+  {
+    "dataset_id": "GSE96058",
+    "excluded_genes": [
+      "AGR3",
+      "CA12",
+      "SLC39A6"
+    ],
+    "feature_count": 1000,
+    "git_commit_hash": null,
+    "model_family": "logistic_regression",
+    "model_path": "reports/runs/ablation_luminal_markers/model.pkl",
+    "notes": "Shortcut-gene ablation excluding: AGR3, CA12, SLC39A6",
+    "output_dir": "reports/runs/ablation_luminal_markers",
+    "prepared_dir": "data/processed/GSE96058_ER_primary",
+    "run_name": "ablation_logistic_regression",
+    "run_type": "ablation",
+    "runtime_seconds": 3.6748,
+    "selected_genes_path": "reports/runs/ablation_luminal_markers/selected_genes.txt",
+    "shap_top_genes_path": "reports/runs/ablation_luminal_markers/shap/top_genes_by_shap.csv",
+    "status": "rejected",
+    "test_metrics": {
+      "auroc": 0.9829512051734275,
+      "brier_score": 0.03140862136392151,
+      "confusion_matrix": [
+        [
+          43,
+          5
+        ],
+        [
+          23,
+          544
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8646481795887568,
+      "mcc": 0.741236366422695,
+      "threshold": 0.7
+    },
+    "timestamp": "2026-04-12T11:58:59.743400+00:00",
+    "validation_metrics": {
+      "auroc": 0.9395208700764255,
+      "brier_score": 0.04697973774945129,
+      "confusion_matrix": [
+        [
+          39,
+          9
+        ],
+        [
+          24,
+          543
+        ]
+      ],
+      "labels": [
+        "0",
+        "1"
+      ],
+      "macro_f1": 0.8366060430403595,
+      "mcc": 0.6813339600888004,
+      "threshold": 0.7
+    }
+  }
+]

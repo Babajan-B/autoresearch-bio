@@ -87,8 +87,8 @@ tests/            pytest suite with small synthetic fixtures
 
 If you use this code, please cite:
 
-Banaganapalli B, Khan S, Thalib HI, Shaik NA. Autoresearch-Bio: a locked research
-loop for reproducible bulk RNA-seq phenotype classification. https://github.com/Babajan-B/autoresearch-bio.git
+Banaganapalli B, Khan S, Thalib HI, Shaik NA. LockLoop-Bio: a code-locked framework
+for leakage-free model selection on transcriptome data. https://github.com/Babajan-B/autoresearch-bio.git
 
 ## Licence
 

@@ -1,1 +1,1 @@
-"""Autoresearch-Bio package."""
+"""LockLoop-Bio package."""

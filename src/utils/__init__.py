@@ -1,1 +1,1 @@
-"""Utility helpers for Autoresearch-Bio."""
+"""Utility helpers for LockLoop-Bio."""

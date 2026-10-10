@@ -84,9 +84,9 @@ def append_result(entry: dict[str, Any], log_path: str | Path = "results_log.jso
 
 def render_markdown_report(log_entries: list[dict[str, Any]]) -> str:
     if not log_entries:
-        return "# Autoresearch-Bio Report\n\nNo runs have been logged yet.\n"
+        return "# LockLoop-Bio Report\n\nNo runs have been logged yet.\n"
 
-    lines = ["# Autoresearch-Bio Report", ""]
+    lines = ["# LockLoop-Bio Report", ""]
     datasets = sorted({entry.get("dataset_id", "unknown") for entry in log_entries})
     for dataset_id in datasets:
         dataset_entries = [entry for entry in log_entries if entry.get("dataset_id") == dataset_id]

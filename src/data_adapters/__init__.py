@@ -1,1 +1,1 @@
-"""Dataset adapters for Autoresearch-Bio."""
+"""Dataset adapters for LockLoop-Bio."""

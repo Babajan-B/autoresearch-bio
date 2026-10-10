@@ -27,7 +27,7 @@ def _parse_label_map(value: str | None) -> dict[str, str] | None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Autoresearch-Bio terminal workflow")
+    parser = argparse.ArgumentParser(description="LockLoop-Bio terminal workflow")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     prepare_parser = subparsers.add_parser("prepare", help="Prepare and freeze a dataset")

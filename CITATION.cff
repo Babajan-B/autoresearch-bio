@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "Autoresearch-Bio: A Locked Research Loop for Reproducible Bulk RNA-seq Phenotype Classification"
+title: "LockLoop-Bio: A code-locked framework for leakage-free model selection on transcriptome data"
 authors:
   - family-names: Banaganapalli
     given-names: Babajan

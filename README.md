@@ -11,7 +11,7 @@ in code before any model is trained:
 |---|---|---|
 | Locked preparation | `src/prepare.py` | cohort filters, label mapping, one stratified train/validation/test split (written once) |
 | Iterative training | `src/train.py`, `src/models.py`, `src/features.py`, `src/ablations.py` | the only layer allowed to vary: model family, seed, number of genes |
-| Locked evaluation | `src/evaluate.py`, `src/metrics.py`, `src/logging_utils.py` | threshold chosen on validation only; AUROC, Macro-F1, Brier, MCC; promotion by validation AUROC; append-only audit log |
+| Locked evaluation | `src/evaluate.py`, `src/metrics.py`, `src/logging_utils.py` | threshold chosen on validation only; AUROC, Macro-F1, Brier, MCC; promotion by validation AUROC; timestamped run log |
 | External check | `src/external_validation.py` | frozen models applied to a companion cohort, outside the audit log |
 
 Guardrails enforced by the code:
@@ -19,8 +19,8 @@ Guardrails enforced by the code:
 - a logistic-regression baseline must be logged before any other model;
 - genes are ranked by variance on the training split only;
 - a run is accepted only if its validation AUROC beats the current best
-  (ties: Macro-F1, −Brier, MCC); test metrics are logged but never read by the rule;
-- every run appends its configuration, git commit, metrics and artefact paths to `results_log.json`.
+  (ties: Macro-F1, −Brier, MCC); test metrics are calculated and logged but not used by the rule;
+- every run adds a timestamped record (configuration, metrics, artefact paths and a git-commit field) to `results_log.json`; new runs are appended, and the only later change is relabelling a previously accepted run as superseded.
 
 ## Installation
 
@@ -88,7 +88,7 @@ tests/            pytest suite with small synthetic fixtures
 If you use this code, please cite:
 
 Banaganapalli B. LockLoop-Bio: a code-locked framework
-for leakage-free model selection on transcriptome data. https://github.com/Babajan-B/autoresearch-bio.git
+for leakage-controlled model selection on transcriptome data. https://github.com/Babajan-B/autoresearch-bio.git
 
 ## Licence
 

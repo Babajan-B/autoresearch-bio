@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "LockLoop-Bio: A code-locked framework for leakage-free model selection on transcriptome data"
+title: "LockLoop-Bio: A code-locked framework for leakage-controlled model selection on transcriptome data"
 authors:
   - family-names: Banaganapalli
     given-names: Babajan

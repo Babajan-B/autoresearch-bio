@@ -5,14 +5,5 @@ authors:
   - family-names: Banaganapalli
     given-names: Babajan
     affiliation: "Department of Genetic Medicine, Faculty of Medicine, King Abdulaziz University"
-  - family-names: Khan
-    given-names: Sariya
-    affiliation: "Batterjee Medical College"
-  - family-names: Thalib
-    given-names: Husna Irfan
-    affiliation: "Batterjee Medical College"
-  - family-names: Shaik
-    given-names: Noor Ahmad
-    affiliation: "Department of Genetic Medicine, Faculty of Medicine, King Abdulaziz University"
 license: MIT
 repository-code: "https://github.com/Babajan-B/autoresearch-bio"

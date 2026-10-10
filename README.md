@@ -87,7 +87,7 @@ tests/            pytest suite with small synthetic fixtures
 
 If you use this code, please cite:
 
-Banaganapalli B, Khan S, Thalib HI, Shaik NA. LockLoop-Bio: a code-locked framework
+Banaganapalli B. LockLoop-Bio: a code-locked framework
 for leakage-free model selection on transcriptome data. https://github.com/Babajan-B/autoresearch-bio.git
 
 ## Licence

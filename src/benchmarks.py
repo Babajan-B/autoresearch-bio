@@ -18,6 +18,20 @@ BENCHMARK_PRESETS: dict[str, dict[str, Any]] = {
             "GSE96058_gene_expression_3273_samples_and_136_replicates_transformed.csv.gz"
         ],
     },
+    "gse96058_her2": {
+        "description": "Second, harder benchmark on the same GSE96058 primary tumors: clinical HER2 status.",
+        "input_mode": "geo",
+        "accession": "GSE96058",
+        "label_column": "her2 status",
+        "dataset_id": "GSE96058_HER2_primary",
+        "normalization": "none",
+        "phenotype_filters": {"her2 status": ["0", "1"]},
+        "exclude_title_suffixes": ["repl"],
+        "supplementary_urls": [
+            "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE96nnn/GSE96058/suppl/"
+            "GSE96058_gene_expression_3273_samples_and_136_replicates_transformed.csv.gz"
+        ],
+    },
     "gse81538_pam50_external": {
         "description": "External companion SCAN-B cohort using PAM50 luminal-vs-basal proxy labels for external transportability checks.",
         "input_mode": "geo",

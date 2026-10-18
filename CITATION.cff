@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "LockLoop-Bio"
+authors:
+  - family-names: Banaganapalli
+    given-names: Babajan
+license: MIT
+repository-code: "https://github.com/Babajan-B/autoresearch-bio"

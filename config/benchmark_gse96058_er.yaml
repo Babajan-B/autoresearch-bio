@@ -1,0 +1,9 @@
+name: gse96058_er
+description: Large GEO breast cancer benchmark using ER status on primary tumors only.
+input_mode: geo
+accession: GSE96058
+label_column: er status
+dataset_id: GSE96058_ER_primary
+normalization: none
+exclude_title_suffixes:
+  - repl

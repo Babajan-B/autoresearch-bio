@@ -46,3 +46,29 @@ Average precision for the minority class; differences between endpoints of stron
 
 ## Not planned (anything of this kind will be labelled post hoc)
 Hyperparameter tuning, batch correction, recalibration, additional cohorts or endpoints.
+
+## Amendment 1 (2026-10-26, before any v2 result was seen)
+
+The first launch was stopped after about ten minutes. No output file had been written and no result was looked at
+(results/v2/aborted_v2.0 holds the two progress logs). Reasons: gradient boosting with 2,000 and 5,000 genes made
+the run about 14 hours, and the study had no candidate built on biological prior knowledge. Changes:
+
+1. Gradient boosting is kept at 500 genes only; the 2,000- and 5,000-gene variants are removed.
+2. Two pathway-level candidates are added: logistic regression and random forest on 50 MSigDB Hallmark scores,
+   each computed within a sample as the mean within-sample rank of the set's genes (src/modules.py). These scores
+   use no training data and need no cross-cohort adjustment. Gene-set file hash in study.yaml.
+3. The calibration-in-the-large (mean predicted probability minus observed prevalence) is logged for every hold-out.
+4. The grid therefore has 12 candidates: logistic regression, random forest and Extra Trees × 500/2,000/5,000
+   genes; gradient boosting × 500 genes; two Hallmark candidates. Everything else is unchanged.
+
+### Biological analyses (declared now; scripts/v2_biology.py)
+All use the non-vault SCAN-B tumours and TCGA-BRCA only; the vault stays sealed.
+- B1 Signal strength: per-gene AUROC for each endpoint; number of genes with AUROC ≥ 0.70 or ≤ 0.30; top genes.
+- B2 Label-blind gene filtering versus signal: share of the 100 most informative genes retained by the variance
+  filter at 500/2,000/5,000 genes, and the variance rank of marker genes (ESR1, PGR, FOXA1, GATA3, ERBB2, GRB7,
+  STARD3, PGAP3, MIEN1, MKI67, TOP2A, AURKA).
+- B3 Pathway programmes: AUROC of each Hallmark score per endpoint in SCAN-B and in TCGA, and their agreement
+  between cohorts (Spearman correlation).
+- B4 Cohort shift: endpoint prevalence in each cohort, related to the TCGA calibration-in-the-large of the models
+  chosen by each strategy.
+- B5 Optimism of post hoc selection against endpoint signal strength (descriptive, seven endpoints).

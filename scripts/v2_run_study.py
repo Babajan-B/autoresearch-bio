@@ -12,6 +12,7 @@ import pandas as pd
 import yaml
 
 from src.logging_utils import append_result
+from src.modules import load_gmt, rank_scores
 from src.provenance import collect_provenance
 from src.selection_study import policies_from_config, run_endpoint, write_outputs
 from src.utils.io import sha256_file, utc_now
@@ -42,6 +43,14 @@ def main() -> None:
     scanb_labels = pd.read_csv(root / study["data"]["scanb_labels"], index_col=0)
     tcga = pd.read_pickle(root / study["data"]["tcga_expression"])
     tcga_labels = pd.read_csv(root / study["data"]["tcga_labels"], index_col=0)
+    gene_sets_path = Path(study["gene_sets"]["hallmark"])
+    if sha256_file(gene_sets_path) != study["gene_sets"]["sha256"]:
+        raise SystemExit(f"{gene_sets_path}: hash differs from the declared one")
+    provenance.update(gene_sets_path=str(gene_sets_path), gene_sets_sha256=study["gene_sets"]["sha256"])
+    gene_sets = load_gmt(gene_sets_path)
+    # pathway scores are computed within each sample, so they use no training data
+    scanb = {"genes": scanb, "hallmark": rank_scores(scanb, gene_sets)}
+    tcga = {"genes": tcga, "hallmark": rank_scores(tcga, gene_sets)}
     design, policies = study["design"], policies_from_config(study["policies"])
     repeats = args.repeats or design["repeats"]
 

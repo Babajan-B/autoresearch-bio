@@ -1,4 +1,4 @@
-# Selection study v2. Declared before any v2 model was trained; see DECLARATION.md for the rationale.
+# Selection study v2.1. Declared before any v2 result was seen; see DECLARATION.md (incl. Amendment 1).
 data:
   scanb_expression: data/v2/scanb_expr.pkl
   scanb_labels: data/v2/scanb_labels.csv
@@ -10,8 +10,16 @@ data:
     tcga_expr.pkl: 31d2d4930dbd7f3a032ef3ecb75408b540433e6402279240b78488ce9665824f
     tcga_labels.csv: 03925e0cbd0c80775948fb7d6ea42bdcaeb081d523ff92df6f1d37eb551e0467
 
+gene_sets:
+  hallmark: config/v2/genesets/MSigDB_Hallmark_2020.gmt   # MSigDB Hallmark 2020 (Liberzon et al. 2015), via Enrichr
+  sha256: 4275592957a1587652092bb398cf77216fde5b8daa2aedaa0e016f7d10bbdb81
+
 endpoints: [er, pgr, her2, nhg3, ki67, luma_lumb, node]
-external_endpoints: [er, pgr, her2, node]   # labelled in TCGA-BRCA
+external_gene_sets:
+  hallmark: config/v2/genesets/MSigDB_Hallmark_2020.gmt   # MSigDB Hallmark 2020 (Liberzon et al. 2015), via Enrichr
+  sha256: 4275592957a1587652092bb398cf77216fde5b8daa2aedaa0e016f7d10bbdb81
+
+endpoints: [er, pgr, her2, node]   # labelled in TCGA-BRCA
 
 design:
   vault_fraction: 0.25
@@ -32,8 +40,9 @@ grid:
   - {model_family: extra_trees, top_k_genes: 2000}
   - {model_family: extra_trees, top_k_genes: 5000}
   - {model_family: hist_gradient_boosting, top_k_genes: 500}
-  - {model_family: hist_gradient_boosting, top_k_genes: 2000}
-  - {model_family: hist_gradient_boosting, top_k_genes: 5000}
+  # pathway-level candidates: 50 per-sample Hallmark scores (src/modules.py)
+  - {model_family: logistic_regression, feature_space: hallmark, top_k_genes: 50}
+  - {model_family: random_forest, feature_space: hallmark, top_k_genes: 50}
 
 baseline: {model_family: logistic_regression, top_k_genes: 2000}
 

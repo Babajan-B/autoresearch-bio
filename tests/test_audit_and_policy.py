@@ -94,3 +94,28 @@ def test_selection_study_runs_and_post_hoc_is_most_optimistic() -> None:
     post_hoc = picks[picks.strategy == "post_hoc_test"].reported_test_auroc
     for strategy in ("cv1se", "baseline_only"):
         assert (post_hoc.values >= picks[picks.strategy == strategy].reported_test_auroc.values - 1e-12).all()
+
+
+def test_pathway_scores_are_per_sample_and_study_accepts_spaces() -> None:
+    import numpy as np
+    import pandas as pd
+
+    from src.modules import rank_scores
+    from src.selection_study import run_endpoint
+
+    rng = np.random.default_rng(1)
+    genes = [f"g{j}" for j in range(40)]
+    x = pd.DataFrame(rng.normal(size=(120, 40)), index=[f"s{i}" for i in range(120)], columns=genes)
+    sets = {"up": genes[:10], "rest": genes[10:30], "too_small": genes[:3]}
+    scores = rank_scores(x, sets)
+    assert list(scores.columns) == ["up", "rest"]
+    # scoring a single sample alone gives the same value: no cross-sample information
+    assert np.allclose(rank_scores(x.iloc[[5]], sets).to_numpy(), scores.iloc[[5]].to_numpy())
+    y = pd.Series((x[genes[:10]].mean(axis=1) > 0).astype(int), index=x.index)
+    grid = [{"model_family": "logistic_regression", "top_k_genes": 10},
+            {"model_family": "logistic_regression", "feature_space": "pathways", "top_k_genes": 2}]
+    candidate_scores, picks = run_endpoint({"genes": x, "pathways": scores}, y, grid=grid, policies=[], baseline=grid[0], repeats=1,
+                            folds=3, vault_fraction=0.25, test_fraction=0.25, vault_seed=1, repeat_seed=1,
+                            progress=lambda m: None)
+    assert set(candidate_scores.candidate) == {"logistic_regression|genes|10", "logistic_regression|pathways|2"}
+    assert set(picks.feature_space) <= {"genes", "pathways"}

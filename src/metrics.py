@@ -97,6 +97,7 @@ def probability_metrics(y_true: np.ndarray, positive_probabilities: np.ndarray) 
         "average_precision": float(average_precision_score(y_true == minority, minority_scores)),
         "brier_score": float(np.mean((positive_probabilities - y_true) ** 2)),
         "calibration_slope": slope,
+        "calibration_in_the_large": float(np.mean(positive_probabilities) - np.mean(y_true)),
         "abs_log_calibration_slope": float(abs(np.log(slope))) if slope > 0 else float("inf"),
     }
 

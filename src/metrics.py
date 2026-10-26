@@ -72,3 +72,31 @@ def compute_classification_metrics(
     if threshold is not None:
         metrics["threshold"] = float(threshold)
     return metrics
+
+
+def calibration_slope(y_true: np.ndarray, positive_probabilities: np.ndarray) -> float:
+    """Slope of an unpenalised logistic recalibration of y on logit(p); 1 is ideal, <1 too extreme, >1 too conservative."""
+    from sklearn.linear_model import LogisticRegression
+
+    p = np.clip(np.asarray(positive_probabilities, dtype=float), 1e-6, 1 - 1e-6)
+    logit = np.log(p / (1 - p)).reshape(-1, 1)
+    # C=1e10 is effectively unpenalised and avoids penalty=None, deprecated in scikit-learn 1.8
+    return float(LogisticRegression(C=1e10, max_iter=1000).fit(logit, y_true).coef_[0, 0])
+
+
+def probability_metrics(y_true: np.ndarray, positive_probabilities: np.ndarray) -> dict[str, float]:
+    """Threshold-free metrics used by the promotion policies and the selection study."""
+    from sklearn.metrics import average_precision_score
+
+    slope = calibration_slope(y_true, positive_probabilities)
+    minority = int(np.mean(y_true) < 0.5)
+    minority_scores = positive_probabilities if minority == 1 else 1 - positive_probabilities
+    return {
+        "auroc": float(roc_auc_score(y_true, positive_probabilities)),
+        # minority class as positive, so precision-recall reflects the rarer phenotype
+        "average_precision": float(average_precision_score(y_true == minority, minority_scores)),
+        "brier_score": float(np.mean((positive_probabilities - y_true) ** 2)),
+        "calibration_slope": slope,
+        "abs_log_calibration_slope": float(abs(np.log(slope))) if slope > 0 else float("inf"),
+    }
+

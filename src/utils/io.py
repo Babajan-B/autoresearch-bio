@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import gzip
+import hashlib
 import io
 import json
 import subprocess
@@ -176,6 +177,22 @@ def get_git_commit_hash(cwd: str | Path | None = None) -> str | None:
     except (subprocess.CalledProcessError, FileNotFoundError):
         return None
     return result.stdout.strip() or None
+
+
+def git_tree_is_dirty(cwd: str | Path | None = None) -> bool | None:
+    try:
+        result = subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"], cwd=cwd, check=True, capture_output=True, text=True)
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+    return bool(result.stdout.strip())
+
+
+def sha256_file(path: str | Path) -> str:
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def serialize_dataclass(instance: Any) -> dict[str, Any]:

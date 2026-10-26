@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from pathlib import Path
 from typing import Any
 
-from src.utils.io import read_json, write_json
+from src.utils.io import read_json, sha256_file, write_json
 
 
 def read_results_log(log_path: str | Path = "results_log.json") -> list[dict[str, Any]]:
@@ -29,14 +31,38 @@ def baseline_exists(log_path: str | Path, dataset_id: str) -> bool:
     )
 
 
+def _as_candidate(entry: dict[str, Any], source: str) -> dict[str, Any]:
+    cv = source == "cv"
+    return {
+        "model_family": entry.get("model_family"),
+        "feature_count": entry.get("feature_count", 0),
+        "is_baseline": entry.get("run_type") == "baseline",
+        "metrics": entry["cv_metrics"] if cv else entry["validation_metrics"],
+        "se": entry.get("cv_se", {}) if cv else {},
+    }
+
+
 def determine_acceptance(
     log_path: str | Path,
     dataset_id: str,
     validation_metrics: dict[str, Any],
     run_type: str,
+    policy: Any = None,
+    candidate_entry: dict[str, Any] | None = None,
 ) -> str:
     if run_type == "baseline":
         return "accepted"
+
+    if policy is not None:
+        # set-based choice over the baseline and all training runs; ablations are diagnostics and never promoted
+        from src.promotion import choose
+
+        if run_type != "train":
+            return "rejected"
+        logged = [e for e in read_results_log(log_path)
+                  if e.get("dataset_id") == dataset_id and e.get("run_type") in {"baseline", "train"}]
+        pool = [_as_candidate(e, policy.source) for e in logged] + [_as_candidate(candidate_entry, policy.source)]
+        return "accepted" if choose(pool, policy) == len(pool) - 1 else "rejected"
 
     previous_entries = [
         entry
@@ -52,34 +78,60 @@ def determine_acceptance(
     return "rejected"
 
 
-def _revoke_previous_accepted(log_path: str | Path, dataset_id: str, keep_run_name: str) -> None:
-    """Revoke acceptance from all non-baseline runs except the designated best."""
-    log_entries = read_results_log(log_path)
-    changed = False
-    for entry in log_entries:
-        if (
-            entry.get("dataset_id") == dataset_id
-            and entry.get("status") == "accepted"
-            and entry.get("run_type") != "baseline"
-            and entry.get("run_name") != keep_run_name
-        ):
-            entry["status"] = "superseded"
-            changed = True
-    if changed:
-        write_json(log_path, log_entries)
+GENESIS_HASH = "0" * 64
 
 
-def append_result(entry: dict[str, Any], log_path: str | Path = "results_log.json") -> None:
+def entry_digest(entry: dict[str, Any]) -> str:
+    """SHA-256 of an entry's canonical JSON, excluding its own entry_hash field."""
+    body = {key: value for key, value in entry.items() if key != "entry_hash"}
+    return hashlib.sha256(json.dumps(body, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
+def append_result(entry: dict[str, Any], log_path: str | Path = "results_log.json") -> dict[str, Any]:
+    """Append one entry to the hash-chained log. Earlier entries are never rewritten."""
     log_entries = read_results_log(log_path)
-    log_entries.append(entry)
+    # round-trip through JSON so the hash is computed on exactly what is stored
+    record = json.loads(json.dumps(entry, sort_keys=True))
+    record["prev_hash"] = log_entries[-1].get("entry_hash", GENESIS_HASH) if log_entries else GENESIS_HASH
+    record["entry_hash"] = entry_digest(record)
+    log_entries.append(record)
     write_json(log_path, log_entries)
+    return record
 
-    if entry.get("status") == "accepted" and entry.get("run_type") != "baseline":
-        _revoke_previous_accepted(
-            log_path,
-            entry["dataset_id"],
-            keep_run_name=entry["run_name"],
-        )
+
+def verify_log(log_path: str | Path = "results_log.json") -> list[str]:
+    """Return a list of integrity problems; an empty list means the chain is intact."""
+    problems: list[str] = []
+    previous = GENESIS_HASH
+    for index, entry in enumerate(read_results_log(log_path)):
+        name = entry.get("run_name", "?")
+        if "entry_hash" not in entry:
+            problems.append(f"entry {index} ({name}): no entry_hash (written before hash chaining)")
+            previous = GENESIS_HASH
+            continue
+        if entry.get("prev_hash") != previous:
+            problems.append(f"entry {index} ({name}): prev_hash does not match the preceding entry")
+        if entry_digest(entry) != entry["entry_hash"]:
+            problems.append(f"entry {index} ({name}): content does not match entry_hash")
+        for path_key, hash_key in (("declaration_path", "declaration_sha256"), ("splits_path", "splits_sha256")):
+            path, expected = entry.get("provenance", {}).get(path_key), entry.get("provenance", {}).get(hash_key)
+            if path and expected and Path(path).exists() and sha256_file(path) != expected:
+                problems.append(f"entry {index} ({name}): {path} changed since the run")
+        previous = entry["entry_hash"]
+    return problems
+
+
+def effective_status(log_entries: list[dict[str, Any]]) -> dict[int, str]:
+    """Status of each entry as of now: accepted runs that a later accepted run replaced become superseded."""
+    status = {index: entry.get("status", "") for index, entry in enumerate(log_entries)}
+    last_accepted: dict[str, int] = {}
+    for index, entry in enumerate(log_entries):
+        if entry.get("status") == "accepted" and entry.get("run_type") != "baseline":
+            dataset_id = entry.get("dataset_id")
+            if dataset_id in last_accepted:
+                status[last_accepted[dataset_id]] = "superseded"
+            last_accepted[dataset_id] = index
+    return status
 
 
 def render_markdown_report(log_entries: list[dict[str, Any]]) -> str:
@@ -87,16 +139,18 @@ def render_markdown_report(log_entries: list[dict[str, Any]]) -> str:
         return "# LockLoop-Bio Report\n\nNo runs have been logged yet.\n"
 
     lines = ["# LockLoop-Bio Report", ""]
+    status = effective_status(log_entries)
     datasets = sorted({entry.get("dataset_id", "unknown") for entry in log_entries})
     for dataset_id in datasets:
-        dataset_entries = [entry for entry in log_entries if entry.get("dataset_id") == dataset_id]
-        accepted = [entry for entry in dataset_entries if entry.get("status") == "accepted"]
-        best_entry = max(accepted or dataset_entries, key=lambda entry: metric_rank_tuple(entry["validation_metrics"]))
+        indices = [index for index, entry in enumerate(log_entries) if entry.get("dataset_id") == dataset_id]
+        accepted = [index for index in indices if status[index] == "accepted"]
+        # the current model is the most recent accepted run (a non-baseline one if any was accepted)
+        best_entry = log_entries[max(accepted, key=lambda i: (log_entries[i].get("run_type") != "baseline", i))] if accepted else log_entries[indices[-1]]
 
         lines.append(f"## {dataset_id}")
         lines.append("")
-        lines.append(f"- Total runs: {len(dataset_entries)}")
-        lines.append(f"- Accepted runs: {sum(entry.get('status') == 'accepted' for entry in dataset_entries)}")
+        lines.append(f"- Total runs: {len(indices)}")
+        lines.append(f"- Accepted runs: {len(accepted)}")
         lines.append(f"- Best run: {best_entry.get('run_name')}")
         lines.append(f"- Best model family: {best_entry.get('model_family')}")
         lines.append(

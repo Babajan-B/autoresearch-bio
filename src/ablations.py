@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 from src.logging_utils import read_results_log
 from src.train import TrainingRunSummary, run_training
@@ -16,6 +17,7 @@ def run_gene_ablation(
     top_k_genes: int = 1000,
     log_path: str | Path = "results_log.json",
     random_seed: int = 42,
+    **locked_options: Any,
 ) -> TrainingRunSummary:
     summary = run_training(
         prepared_dir=prepared_dir,
@@ -28,6 +30,7 @@ def run_gene_ablation(
         notes=f"Shortcut-gene ablation excluding: {', '.join(genes)}",
         run_type="ablation",
         run_name=f"ablation_{model_family}",
+        **locked_options,
     )
     _write_ablation_report(output_dir=output_dir, dataset_id=summary.dataset_id, genes=genes, log_path=log_path)
     return summary

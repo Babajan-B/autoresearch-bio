@@ -8,7 +8,7 @@ from pathlib import Path
 from src.benchmarks import BENCHMARK_PRESETS, resolve_benchmark_preset
 from src.ablations import run_gene_ablation
 from src.external_validation import run_external_validation
-from src.logging_utils import read_results_log, render_markdown_report
+from src.logging_utils import read_results_log, render_markdown_report, verify_log
 from src.prepare import prepare_dataset, prepared_summary
 from src.train import run_baseline, run_training
 
@@ -76,6 +76,14 @@ def build_parser() -> argparse.ArgumentParser:
     ablate_parser.add_argument("--top-k-genes", type=int, default=1000)
     ablate_parser.add_argument("--log-path", default="results_log.json")
     ablate_parser.add_argument("--random-seed", type=int, default=42)
+
+    for locked_parser in (baseline_parser, train_parser, ablate_parser):
+        locked_parser.add_argument("--declaration", default=None, help="Declared analysis plan; its SHA-256 is stored with the run")
+        locked_parser.add_argument("--policy", default=None, help="Promotion policy YAML (default: legacy validation-AUROC rule)")
+        locked_parser.add_argument("--require-clean", action="store_true", help="Refuse to run from uncommitted code")
+
+    verify_parser = subparsers.add_parser("verify-log", help="Check the hash chain and file hashes of an audit log")
+    verify_parser.add_argument("--log-path", default="results_log.json")
 
     report_parser = subparsers.add_parser("report", help="Generate a Markdown report from results_log.json")
     report_parser.add_argument("--log-path", default="results_log.json")
@@ -168,6 +176,9 @@ def main() -> None:
 
     if args.command == "baseline":
         summary = run_baseline(
+            declaration_path=args.declaration,
+            policy_path=args.policy,
+            require_clean=args.require_clean,
             prepared_dir=args.prepared_dir,
             output_dir=args.output_dir,
             top_k_genes=args.top_k_genes,
@@ -179,6 +190,9 @@ def main() -> None:
 
     if args.command == "train":
         summary = run_training(
+            declaration_path=args.declaration,
+            policy_path=args.policy,
+            require_clean=args.require_clean,
             prepared_dir=args.prepared_dir,
             output_dir=args.output_dir,
             model_family=args.model_family,
@@ -193,6 +207,9 @@ def main() -> None:
 
     if args.command == "ablate":
         summary = run_gene_ablation(
+            declaration_path=args.declaration,
+            policy_path=args.policy,
+            require_clean=args.require_clean,
             prepared_dir=args.prepared_dir,
             output_dir=args.output_dir,
             genes=_parse_genes(args.genes),
@@ -203,6 +220,11 @@ def main() -> None:
         )
         print(json.dumps(asdict(summary), indent=2))
         return
+
+    if args.command == "verify-log":
+        problems = verify_log(args.log_path)
+        print("\n".join(problems) if problems else f"OK: {len(read_results_log(args.log_path))} entries, hash chain intact")
+        raise SystemExit(1 if problems else 0)
 
     if args.command == "report":
         entries = read_results_log(args.log_path)

@@ -133,3 +133,15 @@ def test_declared_study_config_is_complete() -> None:
     ids = [candidate_id(c) for c in study["grid"]]
     assert len(ids) == len(set(ids)) == 12 and candidate_id(study["baseline"]) in ids
     assert len([Policy(**p) for p in study["policies"]]) == 7
+
+
+def test_verify_log_checks_output_files(tmp_path: Path) -> None:
+    from src.utils.io import sha256_file
+
+    out = tmp_path / "picks.csv"
+    out.write_text("a,b\n1,2\n")
+    log = tmp_path / "log.json"
+    append_result({"run_name": "s", "outputs": {"picks": str(out)}, "outputs_sha256": {"picks": sha256_file(out)}}, log)
+    assert verify_log(log) == []
+    out.write_text("a,b\n1,3\n")
+    assert any("output" in p for p in verify_log(log))

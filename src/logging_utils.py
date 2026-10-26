@@ -127,6 +127,10 @@ def verify_log(log_path: str | Path = "results_log.json") -> list[str]:
             path, expected = entry.get("provenance", {}).get(path_key), entry.get("provenance", {}).get(hash_key)
             if path and expected and Path(path).exists() and sha256_file(path) != expected:
                 problems.append(f"entry {index} ({name}): {path} changed since the run")
+        for key, path in entry.get("outputs", {}).items():
+            expected = entry.get("outputs_sha256", {}).get(key)
+            if expected and Path(path).exists() and sha256_file(path) != expected:
+                problems.append(f"entry {index} ({name}): output {path} changed since the run")
         previous = entry["entry_hash"]
     return problems
 

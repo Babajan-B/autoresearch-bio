@@ -73,3 +73,24 @@ def test_loop_with_cv_policy_and_provenance(tmp_path: Path) -> None:
     assert verify_log(log) == []
     declaration.write_text("plan changed after the runs")
     assert any("changed since the run" in p for p in verify_log(log))
+
+
+def test_selection_study_runs_and_post_hoc_is_most_optimistic() -> None:
+    import numpy as np
+    import pandas as pd
+
+    from src.selection_study import apply_strategies, run_endpoint
+
+    rng = np.random.default_rng(0)
+    x = pd.DataFrame(rng.normal(size=(160, 30)), index=[f"s{i}" for i in range(160)], columns=[f"g{j}" for j in range(30)])
+    y = pd.Series((x["g0"] + rng.normal(scale=2, size=160) > 0).astype(int), index=x.index)
+    grid = [{"model_family": "logistic_regression", "top_k_genes": 10}, {"model_family": "random_forest", "top_k_genes": 30}]
+    policies = [Policy(name="legacy", tie_breakers=["brier_score"]), Policy(name="cv1se", source="cv", tolerance="one_se", tie_breakers=["complexity"])]
+    scores, picks = run_endpoint(x, y, grid=grid, policies=policies, baseline=grid[0], repeats=2, folds=3,
+                                 vault_fraction=0.25, test_fraction=0.25, vault_seed=1, repeat_seed=1,
+                                 external=(x, y), progress=lambda m: None)
+    assert set(picks.strategy) == {"post_hoc_test", "legacy", "cv1se", "baseline_only"}
+    assert {"vault_auroc", "external_auroc", "vault_auroc_regret"} <= set(picks.columns)
+    post_hoc = picks[picks.strategy == "post_hoc_test"].reported_test_auroc
+    for strategy in ("cv1se", "baseline_only"):
+        assert (post_hoc.values >= picks[picks.strategy == strategy].reported_test_auroc.values - 1e-12).all()

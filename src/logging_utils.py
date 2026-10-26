@@ -89,6 +89,16 @@ def entry_digest(entry: dict[str, Any]) -> str:
 
 def append_result(entry: dict[str, Any], log_path: str | Path = "results_log.json") -> dict[str, Any]:
     """Append one entry to the hash-chained log. Earlier entries are never rewritten."""
+    # shortcut: fcntl lock is POSIX-only; add a Windows lock if the framework is ever run there in parallel
+    import fcntl
+
+    Path(log_path).parent.mkdir(parents=True, exist_ok=True)
+    with open(f"{log_path}.lock", "w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        return _append_locked(entry, log_path)
+
+
+def _append_locked(entry: dict[str, Any], log_path: str | Path) -> dict[str, Any]:
     log_entries = read_results_log(log_path)
     # round-trip through JSON so the hash is computed on exactly what is stored
     record = json.loads(json.dumps(entry, sort_keys=True))

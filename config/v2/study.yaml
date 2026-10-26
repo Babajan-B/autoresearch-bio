@@ -1,0 +1,76 @@
+# Selection study v2. Declared before any v2 model was trained; see DECLARATION.md for the rationale.
+data:
+  scanb_expression: data/v2/scanb_expr.pkl
+  scanb_labels: data/v2/scanb_labels.csv
+  tcga_expression: data/v2/tcga_expr.pkl
+  tcga_labels: data/v2/tcga_labels.csv
+  sha256:
+    scanb_expr.pkl: cd01f9cf8bd67ee9a0326e7fa41f9803a8684b2c982ebe5323b0fe831d111c7c
+    scanb_labels.csv: 781361be580ed283f719c0d9d695d822f2e7fc06239882eac3d7255b11cc7fe2
+    tcga_expr.pkl: 31d2d4930dbd7f3a032ef3ecb75408b540433e6402279240b78488ce9665824f
+    tcga_labels.csv: 03925e0cbd0c80775948fb7d6ea42bdcaeb081d523ff92df6f1d37eb551e0467
+
+endpoints: [er, pgr, her2, nhg3, ki67, luma_lumb, node]
+external_endpoints: [er, pgr, her2, node]   # labelled in TCGA-BRCA
+
+design:
+  vault_fraction: 0.25
+  vault_seed: 2026
+  repeats: 20
+  repeat_seed: 1000      # repeat r uses seed 1000 + r for the dev/test split, CV folds and models
+  test_fraction: 0.20
+  cv_folds: 5
+
+grid:
+  - {model_family: logistic_regression, top_k_genes: 500}
+  - {model_family: logistic_regression, top_k_genes: 2000}
+  - {model_family: logistic_regression, top_k_genes: 5000}
+  - {model_family: random_forest, top_k_genes: 500}
+  - {model_family: random_forest, top_k_genes: 2000}
+  - {model_family: random_forest, top_k_genes: 5000}
+  - {model_family: extra_trees, top_k_genes: 500}
+  - {model_family: extra_trees, top_k_genes: 2000}
+  - {model_family: extra_trees, top_k_genes: 5000}
+  - {model_family: hist_gradient_boosting, top_k_genes: 500}
+  - {model_family: hist_gradient_boosting, top_k_genes: 2000}
+  - {model_family: hist_gradient_boosting, top_k_genes: 5000}
+
+baseline: {model_family: logistic_regression, top_k_genes: 2000}
+
+policies:
+  - name: legacy_auroc_single_split          # the original framework rule
+    primary: auroc
+    source: validation
+    tolerance: 0.0
+    tie_breakers: [brier_score]
+  - name: cv_auroc
+    primary: auroc
+    source: cv
+    tolerance: 0.0
+    tie_breakers: [brier_score]
+  - name: cv_auroc_one_se_simplest
+    primary: auroc
+    source: cv
+    tolerance: one_se
+    tie_breakers: [complexity, feature_count]
+  - name: cv_auroc_one_se_best_calibrated
+    primary: auroc
+    source: cv
+    tolerance: one_se
+    tie_breakers: [abs_log_calibration_slope]
+  - name: cv_auroc_calibration_constraint
+    primary: auroc
+    source: cv
+    tolerance: one_se
+    constraints: [{metric: abs_log_calibration_slope, max: 0.405}]   # slope within [0.67, 1.5]; else baseline
+    tie_breakers: [complexity, feature_count]
+  - name: cv_ap_one_se_simplest
+    primary: average_precision
+    source: cv
+    tolerance: one_se
+    tie_breakers: [complexity, feature_count]
+  - name: cv_brier_one_se_simplest
+    primary: brier_score
+    source: cv
+    tolerance: one_se
+    tie_breakers: [complexity, feature_count]

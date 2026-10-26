@@ -33,3 +33,6 @@ results_log.json.bak
 *.tif
 *.tiff
 .cache/
+
+# log lock files
+*.json.lock

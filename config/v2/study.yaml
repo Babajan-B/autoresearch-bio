@@ -15,11 +15,7 @@ gene_sets:
   sha256: 4275592957a1587652092bb398cf77216fde5b8daa2aedaa0e016f7d10bbdb81
 
 endpoints: [er, pgr, her2, nhg3, ki67, luma_lumb, node]
-external_gene_sets:
-  hallmark: config/v2/genesets/MSigDB_Hallmark_2020.gmt   # MSigDB Hallmark 2020 (Liberzon et al. 2015), via Enrichr
-  sha256: 4275592957a1587652092bb398cf77216fde5b8daa2aedaa0e016f7d10bbdb81
-
-endpoints: [er, pgr, her2, node]   # labelled in TCGA-BRCA
+external_endpoints: [er, pgr, her2, node]   # labelled in TCGA-BRCA
 
 design:
   vault_fraction: 0.25

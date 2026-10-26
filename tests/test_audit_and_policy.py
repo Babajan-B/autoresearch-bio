@@ -119,3 +119,17 @@ def test_pathway_scores_are_per_sample_and_study_accepts_spaces() -> None:
                             progress=lambda m: None)
     assert set(candidate_scores.candidate) == {"logistic_regression|genes|10", "logistic_regression|pathways|2"}
     assert set(picks.feature_space) <= {"genes", "pathways"}
+
+
+def test_declared_study_config_is_complete() -> None:
+    import yaml
+
+    from src.promotion import Policy
+    from src.selection_study import candidate_id
+
+    study = yaml.safe_load(Path("config/v2/study.yaml").read_text())
+    assert study["endpoints"] == ["er", "pgr", "her2", "nhg3", "ki67", "luma_lumb", "node"]
+    assert study["external_endpoints"] == ["er", "pgr", "her2", "node"]
+    ids = [candidate_id(c) for c in study["grid"]]
+    assert len(ids) == len(set(ids)) == 12 and candidate_id(study["baseline"]) in ids
+    assert len([Policy(**p) for p in study["policies"]]) == 7
